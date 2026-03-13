@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 import { 
   Drone, 
@@ -17,12 +17,8 @@ import {
   ArrowRight,
   Brain,
   VolumeX,
-  Zap,
-  Loader2
+  Zap
 } from 'lucide-react';
-import { db, handleFirestoreError, OperationType } from './firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import ErrorBoundary from './components/ErrorBoundary';
 
 import heroBg from './hero-bg.jpg';
 import crow1 from './crow1.jpg';
@@ -35,14 +31,21 @@ import drone2 from './drone2.jpg';
 const Navbar = () => (
   <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-emerald-100">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div className="flex items-center gap-2">
+      <a 
+        href="#" 
+        onClick={(e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+      >
         <Drone className="w-8 h-8 text-emerald-600" />
         <span className="font-bold text-xl tracking-tight text-emerald-900">ANIMAL PROTECH</span>
-      </div>
+      </a>
       <div className="hidden md:flex items-center gap-8">
         <a href="#problem" className="text-sm font-medium text-emerald-800 hover:text-emerald-600 transition-colors">課題</a>
         <a href="#solution" className="text-sm font-medium text-emerald-800 hover:text-emerald-600 transition-colors">解決策</a>
-        <a href="#trial" className="text-sm font-medium text-emerald-800 hover:text-emerald-600 transition-colors">無料試験</a>
+        <a href="#trial" className="text-sm font-medium text-emerald-800 hover:text-emerald-600 transition-colors">無料トライアル</a>
         <a href="#contact" className="bg-emerald-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-emerald-700 transition-all shadow-md shadow-emerald-200">
           お問い合わせ
         </a>
@@ -77,7 +80,7 @@ const Hero = () => {
             <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-8 drop-shadow-2xl">
               ドローンによる<br />
               <span className="text-emerald-400">カラス対策</span><br />
-              無料試験のご案内
+              <span className="inline-block whitespace-nowrap">無料トライアルのご案内</span>
             </h1>
             <p className="text-xl text-emerald-50 mb-12 leading-relaxed drop-shadow-lg">
               私たちは、ゴルフ場運営におけるカラス被害という深刻な課題に対し、ドローン技術を用いた「スマートで持続可能な解決策」を提案します。プレイヤーの満足度向上とコース管理の効率化を同時に実現します。
@@ -366,7 +369,7 @@ const TrialDetails = () => (
           <div className="p-8 md:p-16">
             <h3 className="text-2xl font-bold text-emerald-900 mb-10 pb-4 border-b border-emerald-100 flex items-center gap-3">
               <span className="w-2 h-8 bg-emerald-500 rounded-full" />
-              （実証実験）の実施内容
+              無料トライアルの実施内容
             </h3>
             <div className="space-y-8">
               <div className="flex gap-4">
@@ -445,196 +448,97 @@ const TrialDetails = () => (
   </section>
 );
 
-const Footer = () => {
-  const [formData, setFormData] = useState({
-    company: '',
-    name: '',
-    email: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const path = 'contacts';
-      // 1. Firestoreに保存
-      await addDoc(collection(db, path), {
-        ...formData,
-        createdAt: serverTimestamp()
-      });
-
-      // 2. メール送信APIを呼び出し
-      await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      setIsSubmitted(true);
-      setFormData({ company: '', name: '', email: '', message: '' });
-    } catch (error) {
-      handleFirestoreError(error, OperationType.CREATE, 'contacts');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  return (
-    <footer id="contact" className="bg-white pt-24 pb-12 border-t border-emerald-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-16 mb-16">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Drone className="w-8 h-8 text-emerald-600" />
-              <span className="font-bold text-2xl tracking-tight text-emerald-900">ANIMAL PROTECH</span>
-            </div>
-            <div className="text-emerald-700 font-bold mb-6">株式会社アーシスト</div>
-            <p className="text-emerald-800/70 mb-8 max-w-md">
-              私たちは、ゴルフ場運営におけるカラス被害という深刻な課題に対し、ドローン技術を用いた「スマートで持続可能な解決策」を提案します。プレイヤーの満足度向上とコース管理の効率化を同時に実現します。
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-start gap-4 text-emerald-900">
-                <MapPin className="w-5 h-5 text-emerald-600 shrink-0 mt-1" />
-                <span>東京都品川区西五反田8-7-11 アクシス五反田ビル2F</span>
-              </div>
-              <div className="flex items-center gap-4 text-emerald-900">
-                <Phone className="w-5 h-5 text-emerald-600 shrink-0" />
-                <span>03-5719-1970</span>
-              </div>
-              <div className="flex items-center gap-4 text-emerald-900">
-                <Mail className="w-5 h-5 text-emerald-600 shrink-0" />
-                <span>info@animalprotech.jp</span>
-              </div>
-            </div>
+const Footer = () => (
+  <footer id="contact" className="bg-white pt-24 pb-12 border-t border-emerald-100">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid md:grid-cols-2 gap-16 mb-16">
+        <div>
+          <div className="flex items-center gap-2 mb-2">
+            <Drone className="w-8 h-8 text-emerald-600" />
+            <span className="font-bold text-2xl tracking-tight text-emerald-900">ANIMAL PROTECH</span>
           </div>
-          
-          <div className="bg-emerald-50 p-8 rounded-3xl border border-emerald-100">
-            <h3 className="text-xl font-bold text-emerald-950 mb-6">お問い合わせ・お申し込み</h3>
-            
-            {isSubmitted ? (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="bg-white p-8 rounded-2xl text-center border border-emerald-200"
-              >
-                <CheckCircle2 className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-emerald-900 mb-2">送信完了</h4>
-                <p className="text-emerald-700 mb-6">お問い合わせありがとうございます。担当者より折り返しご連絡させていただきます。</p>
-                <button 
-                  onClick={() => setIsSubmitted(false)}
-                  className="text-emerald-600 font-bold hover:underline"
-                >
-                  別のお問い合わせを送る
-                </button>
-              </motion.div>
-            ) : (
-              <form className="space-y-4" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-emerald-700 uppercase mb-1">貴社名</label>
-                    <input 
-                      type="text" 
-                      required
-                      className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" 
-                      placeholder="株式会社〇〇" 
-                      value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-emerald-700 uppercase mb-1">お名前</label>
-                    <input 
-                      type="text" 
-                      required
-                      className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" 
-                      placeholder="山田 太郎" 
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-emerald-700 uppercase mb-1">メールアドレス</label>
-                  <input 
-                    type="email" 
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" 
-                    placeholder="example@mail.com" 
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-emerald-700 uppercase mb-1">メッセージ</label>
-                  <textarea 
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all h-32" 
-                    placeholder="トライアル希望日程など"
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  ></textarea>
-                </div>
-                <button 
-                  disabled={isSubmitting}
-                  className="w-full py-4 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200 flex items-center justify-center gap-2 disabled:opacity-70"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      送信中...
-                    </>
-                  ) : (
-                    '送信する'
-                  )}
-                </button>
-              </form>
-            )}
+          <div className="text-emerald-700 font-bold mb-6">株式会社アーシスト</div>
+          <p className="text-emerald-800/70 mb-8 max-w-md">
+            私たちは、ゴルフ場運営におけるカラス被害という深刻な課題に対し、ドローン技術を用いた「スマートで持続可能な解決策」を提案します。プレイヤーの満足度向上とコース管理の効率化を同時に実現します。
+          </p>
+          <div className="space-y-4">
+            <div className="flex items-start gap-4 text-emerald-900">
+              <MapPin className="w-5 h-5 text-emerald-600 shrink-0 mt-1" />
+              <span>東京都品川区西五反田8-7-11 アクシス五反田ビル2F</span>
+            </div>
+            <div className="flex items-center gap-4 text-emerald-900">
+              <Phone className="w-5 h-5 text-emerald-600 shrink-0" />
+              <span>03-5719-1970</span>
+            </div>
+            <div className="flex items-center gap-4 text-emerald-900">
+              <Mail className="w-5 h-5 text-emerald-600 shrink-0" />
+              <span>info@animalprotech.jp</span>
+            </div>
           </div>
         </div>
         
-        <div className="pt-12 border-t border-emerald-50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-emerald-800/50">
-          <p>© 2026 株式会社アーシスト (Earthist Co., Ltd.) All rights reserved.</p>
-          <div className="flex gap-8">
-            <a href="#" className="hover:text-emerald-600 transition-colors">プライバシーポリシー</a>
-            <a href="#" className="hover:text-emerald-600 transition-colors">利用規約</a>
-          </div>
+        <div className="bg-emerald-50 p-8 rounded-3xl border border-emerald-100">
+          <h3 className="text-xl font-bold text-emerald-950 mb-6">お問い合わせ・お申し込み</h3>
+          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-bold text-emerald-700 uppercase mb-1">貴社名</label>
+                <input type="text" className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" placeholder="株式会社〇〇" />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-emerald-700 uppercase mb-1">お名前</label>
+                <input type="text" className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" placeholder="山田 太郎" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-emerald-700 uppercase mb-1">メールアドレス</label>
+              <input type="email" className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" placeholder="example@mail.com" />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-emerald-700 uppercase mb-1">メッセージ</label>
+              <textarea className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all h-32" placeholder="トライアル希望日程など"></textarea>
+            </div>
+            <button className="w-full py-4 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200">
+              送信する
+            </button>
+          </form>
         </div>
       </div>
-    </footer>
-  );
-};
+      
+      <div className="pt-12 border-t border-emerald-50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-emerald-800/50">
+        <p>© 2026 株式会社アーシスト (Earthist Co., Ltd.) All rights reserved.</p>
+        <div className="flex gap-8">
+          <a href="#" className="hover:text-emerald-600 transition-colors">プライバシーポリシー</a>
+          <a href="#" className="hover:text-emerald-600 transition-colors">利用規約</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+);
 
 export default function App() {
   return (
-    <ErrorBoundary>
-      <div className="min-h-screen bg-white font-sans text-emerald-950 selection:bg-emerald-100 selection:text-emerald-900">
-        <Navbar />
-        <main>
-          <Hero />
-          <Problem />
-          <DamageAndMeasures />
-          <Solution />
-          <Gallery />
-          <TrialDetails />
-          
-          <section className="py-24 bg-white">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h2 className="text-3xl font-bold mb-8">「ドローンを飛ばすだけで、カラスが逃げるのか？」</h2>
-              <p className="text-lg text-emerald-800/80 mb-12 leading-relaxed">
-                まずはこのシンプルな疑問を解消するために、当社のドローンをテスト飛行させていただけないでしょうか。<br />
-                御社にデメリットのない形でのご提案ですので、ぜひ前向きにご検討いただけますと幸いです。
-              </p>
-            </div>
-          </section>
-        </main>
-        <Footer />
-      </div>
-    </ErrorBoundary>
+    <div className="min-h-screen bg-white font-sans text-emerald-950 selection:bg-emerald-100 selection:text-emerald-900">
+      <Navbar />
+      <main>
+        <Hero />
+        <Problem />
+        <DamageAndMeasures />
+        <Solution />
+        <Gallery />
+        <TrialDetails />
+        
+        <section className="py-24 bg-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-bold mb-8">「ドローンを飛ばすだけで、カラスが逃げるのか？」</h2>
+            <p className="text-lg text-emerald-800/80 mb-12 leading-relaxed">
+              まずはこのシンプルな疑問を解消するために、当社のドローンをテスト飛行させていただけないでしょうか。<br />
+              御社にデメリットのない形でのご提案ですので、ぜひ前向きにご検討いただけますと幸いです。
+            </p>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
   );
 }
