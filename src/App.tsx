@@ -20,14 +20,14 @@ import {
   Zap
 } from 'lucide-react';
 
-// Reliable high-quality images from Unsplash
-const heroBg = "https://images.unsplash.com/photo-1587132137056-bfbf0166836e?auto=format&fit=crop&q=80&w=1920"; // Golf course aerial
-const crow1 = "https://images.unsplash.com/photo-1520951414768-7656614434ef?auto=format&fit=crop&q=80&w=800"; // Crow
-const higai1 = "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&q=80&w=800"; // Golf cart
-const higai2 = "https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?auto=format&fit=crop&q=80&w=800"; // Grass/Nature
-const higai3 = "https://images.unsplash.com/photo-1592919016381-f07ecd5a2c9a?auto=format&fit=crop&q=80&w=800"; // Golf ball
-const drone1 = "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=1200"; // Drone in sky
-const drone2 = "https://images.unsplash.com/photo-1473960104372-7a4046786097?auto=format&fit=crop&q=80&w=1200"; // Drone technology
+// Original local images (moved to public folder for production reliability)
+const heroBg = "/hero-bg.jpg";
+const crow1 = "/crow1.jpg";
+const higai1 = "/higai1.jpg";
+const higai2 = "/higai2.jpg";
+const higai3 = "/higai3.jpg";
+const drone1 = "/drone1.jpg";
+const drone2 = "/drone2.jpg";
 
 const Navbar = () => (
   <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-emerald-100">
@@ -55,11 +55,15 @@ const Navbar = () => (
 
 const Hero = () => {
   return (
-    <section 
-      className="relative min-h-[90vh] flex items-center overflow-hidden bg-emerald-950 bg-cover bg-center"
-      style={{ backgroundImage: `url(${heroBg})` }}
-    >
-      <div className="absolute inset-0 bg-black/40 z-10" />
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-emerald-950">
+      <div 
+        className="absolute inset-0 bg-cover bg-center z-0"
+        style={{ 
+          backgroundImage: `url(${heroBg})`,
+          filter: 'brightness(1.1) contrast(1.1) saturate(1.2)'
+        }}
+      />
+      <div className="absolute inset-0 bg-black/30 z-10" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div className="max-w-3xl">
