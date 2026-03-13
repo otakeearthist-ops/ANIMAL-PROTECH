@@ -44,8 +44,20 @@ const Navbar = () => (
         <span className="font-bold text-lg sm:text-xl tracking-tight text-emerald-900">ANIMAL PROTECH</span>
       </a>
       <div className="flex items-center gap-3 sm:gap-8">
-        <a href="#trial" className="hidden sm:block text-sm font-medium text-emerald-800 hover:text-emerald-600 transition-colors">無料トライアル</a>
-        <a href="#contact" className="bg-emerald-600 text-white px-4 py-1.5 sm:px-5 sm:py-2 rounded-full text-xs sm:text-sm font-bold hover:bg-emerald-700 transition-all shadow-md shadow-emerald-200">
+        <a 
+          href="https://forms.gle/v4BgsozwcWRqVUuj7" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="hidden sm:block text-sm font-medium text-emerald-800 hover:text-emerald-600 transition-colors"
+        >
+          無料トライアル
+        </a>
+        <a 
+          href="https://forms.gle/v4BgsozwcWRqVUuj7" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="bg-emerald-600 text-white px-4 py-1.5 sm:px-5 sm:py-2 rounded-full text-xs sm:text-sm font-bold hover:bg-emerald-700 transition-all shadow-md shadow-emerald-200"
+        >
           お問い合わせ
         </a>
       </div>
@@ -55,17 +67,17 @@ const Navbar = () => (
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-emerald-950">
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-emerald-950">
       <div 
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{ 
           backgroundImage: `url(${heroBg})`,
-          filter: 'brightness(1.1) contrast(1.1) saturate(1.2)'
+          filter: 'brightness(1.05) contrast(1.1) saturate(1.2)'
         }}
       />
-      <div className="absolute inset-0 bg-black/30 z-10" />
+      <div className="absolute inset-0 bg-black/35 z-10" />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 py-12">
         <div className="max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -73,24 +85,26 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="flex flex-wrap gap-3 mb-6">
-              <span className="inline-block px-4 py-1.5 text-sm font-bold tracking-wider text-white uppercase bg-emerald-600 rounded-full">
+              <span className="inline-block px-4 py-1.5 text-sm font-bold tracking-wider text-white uppercase bg-emerald-600 rounded-full shadow-lg">
                 ゴルフ場運営者様向け
               </span>
-              <span className="inline-block px-4 py-1.5 text-sm font-bold tracking-wider text-white uppercase bg-orange-500 rounded-full animate-pulse">
+              <span className="inline-block px-4 py-1.5 text-sm font-bold tracking-wider text-white uppercase bg-orange-500 rounded-full animate-pulse shadow-lg">
                 今だけ完全無料
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 sm:mb-8 drop-shadow-2xl">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 sm:mb-8 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
               ドローンによる<br />
-              <span className="text-emerald-400">カラス対策</span><br />
+              <span className="text-emerald-400 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">カラス対策</span><br />
               <span className="text-3xl sm:text-5xl md:text-7xl inline-block">無料トライアル</span>
             </h1>
-            <p className="text-lg sm:text-xl text-emerald-50 mb-8 sm:mb-12 leading-relaxed drop-shadow-lg">
+            <p className="text-lg sm:text-xl text-emerald-50 mb-8 sm:mb-12 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-medium">
               ゴルフ場運営におけるカラス被害に対し、ドローン技術を用いた「スマートな解決策」を提案。プレイヤーの満足度向上とコース管理の効率化を実現します。
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
               <a 
-                href="#trial" 
+                href="https://forms.gle/v4BgsozwcWRqVUuj7" 
+                target="_blank" 
+                rel="noopener noreferrer"
                 className="w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-5 bg-emerald-500 text-white rounded-2xl font-bold text-lg sm:text-xl hover:bg-emerald-400 transition-all shadow-2xl shadow-emerald-950/50 flex items-center justify-center gap-3 group"
               >
                 無料トライアル申込
@@ -440,9 +454,14 @@ const TrialDetails = () => (
                 ))}
               </div>
               
-              <button className="mt-12 w-full py-4 bg-white text-emerald-600 rounded-2xl font-bold text-lg hover:bg-emerald-50 transition-all shadow-lg">
+              <a 
+                href="https://forms.gle/v4BgsozwcWRqVUuj7" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-12 w-full py-4 bg-white text-emerald-600 rounded-2xl font-bold text-lg hover:bg-emerald-50 transition-all shadow-lg flex items-center justify-center"
+              >
                 無料トライアルを予約する
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -480,31 +499,20 @@ const Footer = () => (
           </div>
         </div>
         
-        <div className="bg-emerald-50 p-8 rounded-3xl border border-emerald-100">
-          <h3 className="text-xl font-bold text-emerald-950 mb-6">お問い合わせ・お申し込み</h3>
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-emerald-700 uppercase mb-1">貴社名</label>
-                <input type="text" className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" placeholder="株式会社〇〇" />
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-emerald-700 uppercase mb-1">お名前</label>
-                <input type="text" className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" placeholder="山田 太郎" />
-              </div>
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-emerald-700 uppercase mb-1">メールアドレス</label>
-              <input type="email" className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" placeholder="example@mail.com" />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-emerald-700 uppercase mb-1">メッセージ</label>
-              <textarea className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all h-32" placeholder="トライアル希望日程など"></textarea>
-            </div>
-            <button className="w-full py-4 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200">
-              送信する
-            </button>
-          </form>
+        <div className="bg-emerald-50 p-8 sm:p-12 rounded-[2.5rem] border border-emerald-100 flex flex-col items-center text-center justify-center">
+          <h3 className="text-2xl font-bold text-emerald-950 mb-4">お問い合わせ・お申し込み</h3>
+          <p className="text-emerald-800/70 mb-8 max-w-sm">
+            無料トライアルのご予約や、サービスに関するご質問は専用フォームよりお気軽にお送りください。
+          </p>
+          <a 
+            href="https://forms.gle/v4BgsozwcWRqVUuj7" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="w-full py-5 bg-emerald-600 text-white rounded-2xl font-bold text-lg hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-200 flex items-center justify-center gap-3 group"
+          >
+            専用フォームを開く
+            <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+          </a>
         </div>
       </div>
       
