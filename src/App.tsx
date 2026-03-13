@@ -20,16 +20,17 @@ import {
   Zap
 } from 'lucide-react';
 
-import heroBg from './hero-bg.jpg';
-import crow1 from './crow1.jpg';
-import higai1 from './higai1.jpg';
-import higai2 from './higai2.jpg';
-import higai3 from './higai3.jpg';
-import drone1 from './drone1.jpg';
-import drone2 from './drone2.jpg';
+// Reliable high-quality images from Unsplash
+const heroBg = "https://images.unsplash.com/photo-1587132137056-bfbf0166836e?auto=format&fit=crop&q=80&w=1920"; // Golf course aerial
+const crow1 = "https://images.unsplash.com/photo-1520951414768-7656614434ef?auto=format&fit=crop&q=80&w=800"; // Crow
+const higai1 = "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&q=80&w=800"; // Golf cart
+const higai2 = "https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?auto=format&fit=crop&q=80&w=800"; // Grass/Nature
+const higai3 = "https://images.unsplash.com/photo-1592919016381-f07ecd5a2c9a?auto=format&fit=crop&q=80&w=800"; // Golf ball
+const drone1 = "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=1200"; // Drone in sky
+const drone2 = "https://images.unsplash.com/photo-1473960104372-7a4046786097?auto=format&fit=crop&q=80&w=1200"; // Drone technology
 
 const Navbar = () => (
-  <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-emerald-100">
+  <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-emerald-100">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <a 
         href="#" 
@@ -39,14 +40,12 @@ const Navbar = () => (
         }}
         className="flex items-center gap-2 hover:opacity-80 transition-opacity"
       >
-        <Drone className="w-8 h-8 text-emerald-600" />
-        <span className="font-bold text-xl tracking-tight text-emerald-900">ANIMAL PROTECH</span>
+        <Drone className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600" />
+        <span className="font-bold text-lg sm:text-xl tracking-tight text-emerald-900">ANIMAL PROTECH</span>
       </a>
-      <div className="hidden md:flex items-center gap-8">
-        <a href="#problem" className="text-sm font-medium text-emerald-800 hover:text-emerald-600 transition-colors">課題</a>
-        <a href="#solution" className="text-sm font-medium text-emerald-800 hover:text-emerald-600 transition-colors">解決策</a>
-        <a href="#trial" className="text-sm font-medium text-emerald-800 hover:text-emerald-600 transition-colors">無料トライアル</a>
-        <a href="#contact" className="bg-emerald-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-emerald-700 transition-all shadow-md shadow-emerald-200">
+      <div className="flex items-center gap-3 sm:gap-8">
+        <a href="#trial" className="hidden sm:block text-sm font-medium text-emerald-800 hover:text-emerald-600 transition-colors">無料トライアル</a>
+        <a href="#contact" className="bg-emerald-600 text-white px-4 py-1.5 sm:px-5 sm:py-2 rounded-full text-xs sm:text-sm font-bold hover:bg-emerald-700 transition-all shadow-md shadow-emerald-200">
           お問い合わせ
         </a>
       </div>
@@ -77,25 +76,25 @@ const Hero = () => {
                 今だけ完全無料
               </span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-8 drop-shadow-2xl">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 sm:mb-8 drop-shadow-2xl">
               ドローンによる<br />
               <span className="text-emerald-400">カラス対策</span><br />
-              <span className="inline-block whitespace-nowrap">無料トライアルのご案内</span>
+              <span className="text-3xl sm:text-5xl md:text-7xl inline-block">無料トライアル</span>
             </h1>
-            <p className="text-xl text-emerald-50 mb-12 leading-relaxed drop-shadow-lg">
-              私たちは、ゴルフ場運営におけるカラス被害という深刻な課題に対し、ドローン技術を用いた「スマートで持続可能な解決策」を提案します。プレイヤーの満足度向上とコース管理の効率化を同時に実現します。
+            <p className="text-lg sm:text-xl text-emerald-50 mb-8 sm:mb-12 leading-relaxed drop-shadow-lg">
+              ゴルフ場運営におけるカラス被害に対し、ドローン技術を用いた「スマートな解決策」を提案。プレイヤーの満足度向上とコース管理の効率化を実現します。
             </p>
-            <div className="flex flex-col sm:flex-row items-center gap-6">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
               <a 
                 href="#trial" 
-                className="w-full sm:w-auto px-10 py-5 bg-emerald-500 text-white rounded-2xl font-bold text-xl hover:bg-emerald-400 transition-all shadow-2xl shadow-emerald-950/50 flex items-center justify-center gap-3 group"
+                className="w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-5 bg-emerald-500 text-white rounded-2xl font-bold text-lg sm:text-xl hover:bg-emerald-400 transition-all shadow-2xl shadow-emerald-950/50 flex items-center justify-center gap-3 group"
               >
-                無料トライアルに申し込む
-                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                無料トライアル申込
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
               </a>
               <a 
                 href="#solution" 
-                className="w-full sm:w-auto px-10 py-5 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-2xl font-bold text-xl hover:bg-white/20 transition-all flex items-center justify-center"
+                className="w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-5 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-2xl font-bold text-lg sm:text-xl hover:bg-white/20 transition-all flex items-center justify-center"
               >
                 詳しく見る
               </a>
@@ -149,12 +148,12 @@ const Problem = () => (
           transition={{ duration: 0.6 }}
           className="relative"
         >
-          <img 
-            src={crow1} 
-            alt="Intelligent Crow" 
-            className="rounded-3xl shadow-2xl w-full h-auto object-cover"
-            referrerPolicy="no-referrer"
-          />
+            <img 
+              src={crow1} 
+              alt="ゴルフ場のカラス被害の原因となる知能の高いカラス" 
+              className="rounded-3xl shadow-2xl w-full h-auto object-cover"
+              referrerPolicy="no-referrer"
+            />
           <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-emerald-50 max-w-xs">
             <p className="text-emerald-800 font-medium italic">
               「退治」するのではなく、「居心地の悪さ」を感じてもらい、自ら移動してもらう。
@@ -170,8 +169,8 @@ const DamageAndMeasures = () => (
   <section className="py-24 bg-emerald-50/50">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-emerald-950 mb-4">ゴルフ場が抱えるカラス被害の現状</h2>
-        <p className="text-emerald-800/60">多くの運営者様が、終わりのない対策に苦慮されています</p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-emerald-950 mb-4 px-4">ゴルフ場が抱えるカラス被害の現状</h2>
+        <p className="text-emerald-800/60 px-4">多くの運営者様が、終わりのない対策に苦慮されています</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -264,14 +263,14 @@ const DamageAndMeasures = () => (
 
 const Solution = () => (
   <section id="solution" className="py-24 bg-emerald-950 text-white overflow-hidden relative">
-    <div className="absolute inset-0 opacity-20">
-      <img 
-        src={drone1} 
-        alt="Drone in sky" 
-        className="w-full h-full object-cover"
-        referrerPolicy="no-referrer"
-      />
-    </div>
+      <div className="absolute inset-0 opacity-20">
+        <img 
+          src={drone1} 
+          alt="ゴルフ場の空を飛ぶ対策用ドローン" 
+          className="w-full h-full object-cover"
+          referrerPolicy="no-referrer"
+        />
+      </div>
     <div className="absolute top-0 right-0 w-1/2 h-full bg-emerald-900/40 skew-x-12 translate-x-1/4" />
     
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -336,8 +335,8 @@ const Gallery = () => (
         >
           <img 
             src={drone2} 
-            alt="活動イメージ" 
-            className="w-full h-auto object-cover"
+            alt="ドローンによるカラス対策の活動イメージ" 
+            className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
         </motion.div>
@@ -349,7 +348,7 @@ const Gallery = () => (
 const TrialDetails = () => (
   <section id="trial" className="py-24 bg-emerald-50">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-16 relative">
+      <div className="text-center mb-12 sm:mb-16 relative px-4">
         <motion.div
           animate={{ y: [0, -10, 0] }}
           transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
@@ -357,8 +356,8 @@ const TrialDetails = () => (
         >
           今だけ限定！
         </motion.div>
-        <h2 className="text-5xl md:text-7xl font-black text-emerald-950 leading-tight tracking-tighter">
-          <span className="text-orange-600 text-xl block mb-4 font-black tracking-[0.4em] uppercase">Limited Offer</span>
+        <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-emerald-950 leading-tight tracking-tighter">
+          <span className="text-orange-600 text-base sm:text-xl block mb-2 sm:mb-4 font-black tracking-[0.2em] sm:tracking-[0.4em] uppercase">Limited Offer</span>
           <span className="bg-gradient-to-r from-emerald-700 via-emerald-600 to-emerald-500 bg-clip-text text-transparent">完全無料</span>
           <span className="text-emerald-950">トライアル</span>
         </h2>
@@ -366,8 +365,8 @@ const TrialDetails = () => (
 
       <div className="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-emerald-100">
         <div className="grid lg:grid-cols-2">
-          <div className="p-8 md:p-16">
-            <h3 className="text-2xl font-bold text-emerald-900 mb-10 pb-4 border-b border-emerald-100 flex items-center gap-3">
+          <div className="p-6 sm:p-8 md:p-16">
+            <h3 className="text-xl sm:text-2xl font-bold text-emerald-900 mb-8 sm:10 pb-4 border-b border-emerald-100 flex items-center gap-3">
               <span className="w-2 h-8 bg-emerald-500 rounded-full" />
               無料トライアルの実施内容
             </h3>
