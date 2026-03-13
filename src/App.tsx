@@ -507,10 +507,6 @@ const Footer = () => (
       
       <div className="pt-12 border-t border-emerald-50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-emerald-800/50">
         <p>© 2026 株式会社アーシスト (Earthist Co., Ltd.) All rights reserved.</p>
-        <div className="flex gap-8">
-          <a href="#" className="hover:text-emerald-600 transition-colors">プライバシーポリシー</a>
-          <a href="#" className="hover:text-emerald-600 transition-colors">利用規約</a>
-        </div>
       </div>
     </div>
   </footer>
